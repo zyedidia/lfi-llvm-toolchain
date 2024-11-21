@@ -1,0 +1,22 @@
+#!/bin/sh
+
+DIR=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
+
+$DIR/lld.orig "$@"
+
+OUTPUT=a.out
+
+while test $# -gt 0; do
+  case "$1" in
+    -o)
+      shift
+      if test $# -gt 0; then
+        OUTPUT=$1
+      fi
+      shift
+      ;;
+    *)
+      shift
+      ;;
+  esac
+done

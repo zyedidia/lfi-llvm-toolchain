@@ -9,15 +9,15 @@ LLVM_MAJOR=19
 PREFIX=$1
 
 # compiler-rt
-mkdir -p build-compiler-rt
-cd build-compiler-rt
+mkdir -p build-compiler-rt-$ARCH
+cd build-compiler-rt-$ARCH
 cmake -G Ninja ../llvm-project/compiler-rt \
     -DCMAKE_C_COMPILER=$PWD/../llvm-project/build/bin/clang \
     -DCMAKE_CXX_COMPILER=$PWD/../llvm-project/build/bin/clang++ \
-    -DLLVM_TARGET_TRIPLE="$ARCH-lfi-linux-musl" \
-    -DCOMPILER_RT_DEFAULT_TARGET_TRIPLE="$ARCH-lfi-linux-musl" \
-    -DCMAKE_C_COMPILER_TARGET="$ARCH-lfi-linux-musl" \
-    -DCMAKE_ASM_COMPILER_TARGET="$ARCH-lfi-linux-musl" \
+    -DLLVM_TARGET_TRIPLE="$ARCH-linux-musl" \
+    -DCOMPILER_RT_DEFAULT_TARGET_TRIPLE="$ARCH-linux-musl" \
+    -DCMAKE_C_COMPILER_TARGET="$ARCH-linux-musl" \
+    -DCMAKE_ASM_COMPILER_TARGET="$ARCH-linux-musl" \
     -DCOMPILER_RT_BUILD_BUILTINS=ON \
     -DCOMPILER_RT_BUILD_LIBFUZZER=OFF \
     -DCOMPILER_RT_BUILD_MEMPROF=OFF \

@@ -10,10 +10,10 @@ PREFIX=$1
 mkdir -p $PREFIX/sysroot/lib
 mkdir -p $PREFIX/sysroot/include
 
-mkdir -p build-llvm/sysroot/lib
-mkdir -p build-llvm/sysroot/include
+mkdir -p build-llvm-$ARCH/sysroot/lib
+mkdir -p build-llvm-$ARCH/sysroot/include
 
-cd build-llvm
+cd build-llvm-$ARCH
 
 cmake -G Ninja ../llvm-project/llvm \
     -DCMAKE_BUILD_TYPE=Release \
@@ -21,7 +21,7 @@ cmake -G Ninja ../llvm-project/llvm \
     -DCMAKE_CXX_COMPILER=clang++ \
     -DLLVM_ENABLE_PROJECTS="lld;clang" \
     -DLLVM_TARGETS_TO_BUILD="X86;AArch64" \
-    -DLLVM_DEFAULT_TARGET_TRIPLE="$ARCH-lfi-linux-musl" \
+    -DLLVM_DEFAULT_TARGET_TRIPLE="$ARCH-linux-musl" \
     -DCMAKE_CXX_COMPILER_LAUNCHER=ccache \
     -DCMAKE_C_COMPILER_LAUNCHER=ccache \
     -DLLVM_BINUTILS_INCDIR=/usr/include \
@@ -38,5 +38,5 @@ ninja install
 
 mkdir -p $PREFIX/lfi-bin
 cd $PREFIX/lfi-bin
-ln -s ../bin/clang lfi-clang
-ln -s ../bin/clang++ lfi-clang++
+ln -sf ../bin/clang $ARCH-linux-musl-clang
+ln -sf ../bin/clang++ $ARCH-linux-musl-clang++
