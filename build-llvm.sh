@@ -56,7 +56,7 @@ cmake -G Ninja ../llvm-project/llvm \
     -DCLANG_DEFAULT_OBJCOPY="llvm-objcopy" \
     -DDEFAULT_SYSROOT=../sysroot
 ninja
-ninja install
+ninja install/strip
 cd ..
 
 rm -rf build-llvm-$ARCH
