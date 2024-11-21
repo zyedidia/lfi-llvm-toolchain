@@ -10,9 +10,8 @@ PREFIX=$1
 mkdir -p $PREFIX/sysroot/lib
 mkdir -p $PREFIX/sysroot/include
 
-mkdir -p build-llvm-$ARCH-base
-cd build-llvm-$ARCH-base
-
+mkdir -p build-llvm
+cd build-llvm
 cmake -G Ninja ../llvm-project/llvm \
     -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_C_COMPILER=clang \
@@ -29,10 +28,14 @@ cmake -G Ninja ../llvm-project/llvm \
 ninja
 cd ..
 
+rm -rf build-llvm-$ARCH-base
+mv build-llvm build-llvm-$ARCH-base
+
 # For some reason we have to build LLVM twice -- once without default options,
 # used to then compile compiler-rt, and one with the default options we want.
-mkdir -p build-llvm-$ARCH
-cd build-llvm-$ARCH
+# Luckily ccache will mostly make this efficient.
+mkdir build-llvm
+cd build-llvm
 cmake -G Ninja ../llvm-project/llvm \
     -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_C_COMPILER=clang \
@@ -54,6 +57,10 @@ cmake -G Ninja ../llvm-project/llvm \
     -DDEFAULT_SYSROOT=../sysroot
 ninja
 ninja install
+cd ..
+
+rm -rf build-llvm-$ARCH
+mv build-llvm build-llvm-$ARCH
 
 mkdir -p $PREFIX/lfi-bin
 cd $PREFIX/lfi-bin
