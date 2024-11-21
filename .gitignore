@@ -1,0 +1,8 @@
+a.out
+*.o
+build-compiler-rt
+build-libcxx
+build-llvm
+musl
+llvm-project
+lfi-*
