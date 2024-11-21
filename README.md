@@ -1,3 +1,26 @@
+# Build LFI tools
+
+You will need to the LFI rewriter tool, called `lfi-leg`.
+
+```
+git clone https://github.com/zyedidia/lfi
+cd lfi
+meson setup build
+cd build
+ninja
+ninja install
+```
+
+Make sure that this tool gets installed somewhere on your `PATH`. When
+configuring meson you can optionally use `meson setup build --prefix=...` to
+give a custom prefix, or you can manually move `lfi-leg/lfi-leg` to your
+destination of choice after running `ninja`.
+
+The default `ninja install` will also install some other tools such as
+`lfi-run` and `lfi-verify`, as well as libraries like `liblfi`.
+
+# Build LLVM
+
 First make sure `ccache` is installed, it will make your build *much* faster,
 since the build requires compiling LLVM twice (the second time is much faster
 thanks to `ccache`).
