@@ -11,11 +11,17 @@ Download the sources
 Build LFI toolchain
 
 ```
-./build-toolchain $PWD/lfi-clang aarch64
+./build-lfi.sh $PWD/aarch64-lfi-clang aarch64
 ```
 
 Build native toolchain (for comparison)
 
 ```
-./build-native $PWD/native-clang aarch64
+./build-native.sh $PWD/aarch64-native-clang aarch64
+```
+
+Build LFI toolchain with only sandboxing for stores:
+
+```
+LFIFLAGS="--sandbox=stores "./build-lfi.sh $PWD/aarch64-lfi-stores-clang aarch64
 ```

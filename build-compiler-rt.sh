@@ -11,6 +11,7 @@ PREFIX=$1
 # compiler-rt
 mkdir -p build-compiler-rt-$ARCH
 cd build-compiler-rt-$ARCH
+rm -rf CMakeFiles CMakeCache.txt
 cmake -G Ninja ../llvm-project/compiler-rt \
     -DCMAKE_C_COMPILER=$PWD/../build-llvm-$ARCH-base/bin/clang \
     -DCMAKE_CXX_COMPILER=$PWD/../build-llvm-$ARCH-base/bin/clang++ \
