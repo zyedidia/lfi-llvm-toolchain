@@ -12,8 +12,8 @@ PREFIX=$1
 mkdir -p build-compiler-rt-$ARCH
 cd build-compiler-rt-$ARCH
 cmake -G Ninja ../llvm-project/compiler-rt \
-    -DCMAKE_C_COMPILER=$PWD/../llvm-project/build/bin/clang \
-    -DCMAKE_CXX_COMPILER=$PWD/../llvm-project/build/bin/clang++ \
+    -DCMAKE_C_COMPILER=$PWD/../build-llvm-$ARCH-base/bin/clang \
+    -DCMAKE_CXX_COMPILER=$PWD/../build-llvm-$ARCH-base/bin/clang++ \
     -DLLVM_TARGET_TRIPLE="$ARCH-linux-musl" \
     -DCOMPILER_RT_DEFAULT_TARGET_TRIPLE="$ARCH-linux-musl" \
     -DCMAKE_C_COMPILER_TARGET="$ARCH-linux-musl" \
