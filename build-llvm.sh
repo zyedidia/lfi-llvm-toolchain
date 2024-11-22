@@ -9,8 +9,9 @@ PREFIX=$1
 
 DEFINE_FLAGS="-DLFI_DEFAULT_FLAGS='\"$LFIFLAGS\"'"
 
+mkdir -p $PREFIX/sysroot/usr/lib
 mkdir -p $PREFIX/sysroot/lib
-mkdir -p $PREFIX/sysroot/include
+mkdir -p $PREFIX/sysroot/usr/include
 
 mkdir -p build-llvm
 cd build-llvm

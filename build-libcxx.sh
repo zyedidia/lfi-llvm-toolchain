@@ -6,13 +6,13 @@ set -ex
 
 PREFIX=$1
 
-rm -rf $PREFIX/sysroot/include/linux
-rm -rf $PREFIX/sysroot/include/asm
-rm -rf $PREFIX/sysroot/include/asm-generic
+rm -rf $PREFIX/sysroot/usr/include/linux
+rm -rf $PREFIX/sysroot/usr/include/asm
+rm -rf $PREFIX/sysroot/usr/include/asm-generic
 
-cp -r /usr/include/linux $PREFIX/sysroot/include
-cp -r /usr/include/asm $PREFIX/sysroot/include
-cp -r /usr/include/asm-generic $PREFIX/sysroot/include
+cp -r /usr/include/linux $PREFIX/sysroot/usr/include
+cp -r /usr/include/asm $PREFIX/sysroot/usr/include
+cp -r /usr/include/asm-generic $PREFIX/sysroot/usr/include
 
 rm -rf build-libcxx-$ARCH
 mkdir -p build-libcxx-$ARCH
@@ -23,7 +23,7 @@ cmake -G Ninja ../llvm-project/runtimes \
     -DCMAKE_CXX_COMPILER=$PREFIX/bin/clang \
     -DLIBCXX_HAS_MUSL_LIBC=YES \
     -DLLVM_ENABLE_RUNTIMES="libcxx;libcxxabi;libunwind" \
-    -DCMAKE_INSTALL_PREFIX=$PREFIX/sysroot \
+    -DCMAKE_INSTALL_PREFIX=$PREFIX/sysroot/usr \
     -DLIBUNWIND_ENABLE_SHARED=NO \
     -DLIBCXXABI_ENABLE_SHARED=NO \
     -DLIBCXX_ENABLE_SHARED=NO \
