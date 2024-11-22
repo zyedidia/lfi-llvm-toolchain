@@ -14,9 +14,9 @@ cp -r /usr/include/linux $PREFIX/sysroot/include
 cp -r /usr/include/asm $PREFIX/sysroot/include
 cp -r /usr/include/asm-generic $PREFIX/sysroot/include
 
+rm -rf build-libcxx-$ARCH
 mkdir -p build-libcxx-$ARCH
 cd build-libcxx-$ARCH
-rm -rf CMakeFiles CMakeCache.txt
 cmake -G Ninja ../llvm-project/runtimes \
     -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_C_COMPILER=$PREFIX/bin/clang \

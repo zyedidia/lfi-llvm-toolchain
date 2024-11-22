@@ -19,11 +19,14 @@ destination of choice after running `ninja`.
 The default `ninja install` will also install some other tools such as
 `lfi-run` and `lfi-verify`, as well as libraries like `liblfi`.
 
-# Build LLVM
+# Build LLVM Toolchain
 
 First make sure `ccache` is installed, it will make your build *much* faster,
-since the build requires compiling LLVM twice (the second time is much faster
-thanks to `ccache`).
+since the build requires compiling LLVM twice (the second time is faster thanks
+to `ccache`).
+
+The builder will first compile LLVM, followed by the target runtime libraries:
+`compiler-rt`, `musl-libc`, `libc++`, `libc++abi`, and `libunwind`.
 
 Download the sources
 
@@ -46,5 +49,5 @@ Build native toolchain (for comparison)
 Build LFI toolchain with only sandboxing for stores:
 
 ```
-LFIFLAGS="--sandbox=stores "./build-lfi.sh $PWD/aarch64-lfi-stores-clang aarch64
+LFIFLAGS="--sandbox=stores" ./build-lfi.sh $PWD/aarch64-lfi-stores-clang aarch64
 ```

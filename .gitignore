@@ -3,6 +3,7 @@ a.out
 build-compiler-rt-*
 build-libcxx-*
 build-llvm-*
+build-llvm
 musl
 llvm-project
 lfi-*
