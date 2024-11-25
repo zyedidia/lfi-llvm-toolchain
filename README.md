@@ -1,6 +1,6 @@
 # Build LFI tools
 
-You will need to the LFI rewriter tool, called `lfi-leg`.
+You will need to install the LFI rewriter tool, called `lfi-leg`.
 
 ```
 git clone https://github.com/zyedidia/lfi
