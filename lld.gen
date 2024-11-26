@@ -2,24 +2,24 @@
 #
 # Unused at the moment (possible way of implementing lfi-postlink for x86_64)
 
-if [ "$ARCH" = "x86_64" ]
+if [ "$MARCH" = "x86_64" ]
 then
     LFIARCH=amd64
-elif [ "$ARCH" = "aarch64" ]
+elif [ "$MARCH" = "aarch64" ]
 then
     LFIARCH=arm64
-elif [ "$ARCH" = "riscv64" ]
+elif [ "$MARCH" = "riscv64" ]
 then
     LFIARCH=riscv64
 fi
 
 cat << EOM
-#!/bin/sh
+#!/bin/bash
 DIR=\$(CDPATH= cd -- "\$(dirname -- "\$0")" && pwd)
 
 set -e
 
-(exec -a \$0 \$DIR/lld.orig "\$@")
+(exec -a \$0 \$DIR/lld.orig "\$@" --no-dependent-libraries)
 
 OUTPUT=a.out
 
