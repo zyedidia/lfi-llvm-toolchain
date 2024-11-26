@@ -1,0 +1,41 @@
+#!/bin/sh
+#
+# Unused at the moment (possible way of implementing lfi-postlink for x86_64)
+
+if [ "$ARCH" = "x86_64" ]
+then
+    LFIARCH=amd64
+elif [ "$ARCH" = "aarch64" ]
+then
+    LFIARCH=arm64
+elif [ "$ARCH" = "riscv64" ]
+then
+    LFIARCH=riscv64
+fi
+
+cat << EOM
+#!/bin/sh
+DIR=\$(CDPATH= cd -- "\$(dirname -- "\$0")" && pwd)
+
+\$DIR/lld.orig "\$@"
+
+OUTPUT=a.out
+
+while test \$# -gt 0; do
+  case "\$1" in
+    -o)
+      shift
+      if test \$# -gt 0; then
+        OUTPUT=\$1
+      fi
+      shift
+      ;;
+    *)
+      shift
+      ;;
+  esac
+done
+
+# run lfi-postlink
+lfi-postlink -a $LFIARCH $(lfi-leg -a $LFIARCH --flags=postlink $LFIFLAGS) \$OUTPUT
+EOM
