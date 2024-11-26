@@ -17,7 +17,9 @@ cat << EOM
 #!/bin/sh
 DIR=\$(CDPATH= cd -- "\$(dirname -- "\$0")" && pwd)
 
-\$DIR/lld.orig "\$@"
+set -e
+
+(exec -a \$0 \$DIR/lld.orig "\$@")
 
 OUTPUT=a.out
 
