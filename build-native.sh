@@ -13,3 +13,7 @@ export ARCH=$2-unknown
 ./build-compiler-rt.sh $PREFIX
 ./build-musl.sh $PREFIX
 ./build-libcxx.sh $PREFIX
+
+# remove the fake lld post-linker
+rm -f $PREFIX/bin/lld
+mv $PREFIX/bin/lld.orig $PREFIX/bin/lld
