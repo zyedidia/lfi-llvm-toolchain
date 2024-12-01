@@ -13,6 +13,9 @@ mkdir -p $PREFIX/sysroot/usr/lib
 mkdir -p $PREFIX/sysroot/lib
 mkdir -p $PREFIX/sysroot/usr/include
 
+# Include this if you want LLVMgold.so
+# -DLLVM_BINUTILS_INCDIR=/usr/include \
+
 mkdir -p build-llvm
 cd build-llvm
 cmake -G Ninja ../llvm-project/llvm \
@@ -24,7 +27,6 @@ cmake -G Ninja ../llvm-project/llvm \
     -DLLVM_DEFAULT_TARGET_TRIPLE="$ARCH-linux-musl" \
     -DCMAKE_CXX_COMPILER_LAUNCHER=ccache \
     -DCMAKE_C_COMPILER_LAUNCHER=ccache \
-    -DLLVM_BINUTILS_INCDIR=/usr/include \
     -DCMAKE_INSTALL_PREFIX=$PREFIX \
     -DLLVM_BUILD_DOCS=OFF \
     -DCMAKE_C_FLAGS="$DEFINE_FLAGS" \
@@ -50,7 +52,6 @@ cmake -G Ninja ../llvm-project/llvm \
     -DLLVM_DEFAULT_TARGET_TRIPLE="$ARCH-linux-musl" \
     -DCMAKE_CXX_COMPILER_LAUNCHER=ccache \
     -DCMAKE_C_COMPILER_LAUNCHER=ccache \
-    -DLLVM_BINUTILS_INCDIR=/usr/include \
     -DCMAKE_INSTALL_PREFIX=$PREFIX \
     -DLLVM_BUILD_DOCS=OFF \
     -DLLVM_INSTALL_TOOLCHAIN_ONLY=ON \

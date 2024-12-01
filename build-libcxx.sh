@@ -11,7 +11,12 @@ rm -rf $PREFIX/sysroot/usr/include/asm
 rm -rf $PREFIX/sysroot/usr/include/asm-generic
 
 cp -r /usr/include/linux $PREFIX/sysroot/usr/include
-cp -r /usr/include/asm $PREFIX/sysroot/usr/include
+# Use /usr/include/asm if available, otherwise use /usr/include/asm-generic
+if [ -d /usr/include/asm ]; then
+    cp -r /usr/include/asm $PREFIX/sysroot/usr/include
+else
+    cp -r /usr/include/asm-generic $PREFIX/sysroot/usr/include/asm
+fi
 cp -r /usr/include/asm-generic $PREFIX/sysroot/usr/include
 
 rm -rf build-libcxx-$ARCH
