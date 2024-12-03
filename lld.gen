@@ -1,6 +1,4 @@
 #!/bin/sh
-#
-# Unused at the moment (possible way of implementing lfi-postlink for x86_64)
 
 if [ "$MARCH" = "x86_64" ]
 then
@@ -19,7 +17,7 @@ DIR=\$(CDPATH= cd -- "\$(dirname -- "\$0")" && pwd)
 
 set -e
 
-(exec -a \$0 \$DIR/lld.orig "\$@" --no-dependent-libraries)
+ARGS=
 
 OUTPUT=a.out
 
@@ -30,14 +28,21 @@ while test \$# -gt 0; do
       if test \$# -gt 0; then
         OUTPUT=\$1
       fi
+      ARGS="\$ARGS -o \$1"
       shift
       ;;
+    -dynamic-linker)
+      shift
+      ARGS="\$ARGS -dynamic-linker \$DIR/../sysroot/lib/ld-musl-$MARCH.so.1"
+      shift
     *)
+      ARGS="\$ARGS \$1"
       shift
       ;;
   esac
 done
 
-# run lfi-postlink
+(exec -a \$0 \$DIR/lld.orig "\$@" --no-dependent-libraries)
+
 lfi-postlink -a $LFIARCH $(lfi-leg -a $LFIARCH --flags=postlink $LFIFLAGS) \$OUTPUT
 EOM
