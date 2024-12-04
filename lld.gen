@@ -43,7 +43,7 @@ while test \$# -gt 0; do
   esac
 done
 
-(exec -a \$0 \$DIR/lld.orig "\$@" --no-dependent-libraries)
+(exec -a \$0 \$DIR/lld.orig \$ARGS --no-dependent-libraries)
 
 lfi-postlink -a $LFIARCH $(lfi-leg -a $LFIARCH --flags=postlink $LFIFLAGS) \$OUTPUT
 EOM
