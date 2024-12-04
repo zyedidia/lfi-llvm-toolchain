@@ -35,6 +35,7 @@ while test \$# -gt 0; do
       shift
       ARGS="\$ARGS -dynamic-linker \$DIR/../sysroot/lib/ld-musl-$MARCH.so.1"
       shift
+      ;;
     *)
       ARGS="\$ARGS \$1"
       shift
