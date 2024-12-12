@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# Usage: build-toolchain.sh PREFIX ARCH (aarch64 or x86_64)
+# Usage: build-native.sh PREFIX ARCH (aarch64 or x86_64)
 
 set -ex
 
@@ -13,7 +13,3 @@ export ARCH=$2-unknown
 ./build-compiler-rt.sh $PREFIX
 ./build-musl.sh $PREFIX
 ./build-libcxx.sh $PREFIX
-
-# remove the fake lld post-linker
-rm -f $PREFIX/bin/lld
-mv $PREFIX/bin/lld.orig $PREFIX/bin/lld
