@@ -6,6 +6,7 @@ build-llvm-*
 build-llvm
 musl
 llvm-project
+linux
 lfi-*
 aarch64-native-clang
 aarch64-lfi-*clang

@@ -6,18 +6,14 @@ set -ex
 
 PREFIX=$1
 
-rm -rf $PREFIX/sysroot/usr/include/linux
-rm -rf $PREFIX/sysroot/usr/include/asm
-rm -rf $PREFIX/sysroot/usr/include/asm-generic
-
-cp -r /usr/include/linux $PREFIX/sysroot/usr/include
-# Use /usr/include/asm if available, otherwise use /usr/include/asm-generic
-if [ -d /usr/include/asm ]; then
-    cp -r /usr/include/asm $PREFIX/sysroot/usr/include
+if [ "$MARCH" = "aarch64" ]
+then
+    LINUX_ARCH=arm64
 else
-    cp -r /usr/include/asm-generic $PREFIX/sysroot/usr/include/asm
+    LINUX_ARCH=$MARCH
 fi
-cp -r /usr/include/asm-generic $PREFIX/sysroot/usr/include
+
+make -C linux headers_install ARCH=$LINUX_ARCH INSTALL_HDR_PATH=$PREFIX/sysroot/usr
 
 rm -rf build-libcxx-$ARCH
 mkdir -p build-libcxx-$ARCH

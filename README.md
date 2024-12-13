@@ -1,6 +1,6 @@
 # Build LFI tools
 
-You will need to install the LFI rewriter tool, called `lfi-leg`.
+You will need to install the LFI rewriter tool, called `lfi-leg` and the post-linker called `lfi-postlink`.
 
 ```
 git clone https://github.com/zyedidia/lfi
