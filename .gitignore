@@ -6,6 +6,7 @@ build-llvm-*
 build-llvm
 musl
 llvm-project
+mimalloc
 linux
 lfi-*
 aarch64-native-clang

@@ -11,3 +11,7 @@ fi
 if [ ! -d linux ]; then
     git clone https://github.com/torvalds/linux --depth 1 -b v6.12
 fi
+
+if [ ! -d mimalloc ]; then
+    git clone https://github.com/microsoft/mimalloc -b v3.0.1
+fi

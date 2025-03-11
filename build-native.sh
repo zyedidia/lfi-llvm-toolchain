@@ -13,3 +13,4 @@ export ARCH=$2-unknown
 ./build-compiler-rt.sh $PREFIX
 ./build-musl.sh $PREFIX
 ./build-libcxx.sh $PREFIX
+./build-mimalloc.sh $PREFIX
