@@ -8,7 +8,6 @@ musl
 llvm-project
 mimalloc
 linux
-lfi-*
 aarch64-native-clang
 aarch64-lfi-*clang
 x86_64-native-*clang

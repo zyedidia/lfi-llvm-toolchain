@@ -75,6 +75,10 @@ rm -rf build-llvm-$ARCH
 mv build-llvm build-llvm-$ARCH
 
 mkdir -p $PREFIX/lfi-bin
+mkdir -p $PREFIX/lfi-clang
 cd $PREFIX/lfi-bin
+ln -sf ../bin/clang $ARCH-linux-musl-clang
+ln -sf ../bin/clang++ $ARCH-linux-musl-clang++
+cd $PREFIX/lfi-clang
 ln -sf ../bin/clang $ARCH-linux-musl-clang
 ln -sf ../bin/clang++ $ARCH-linux-musl-clang++
