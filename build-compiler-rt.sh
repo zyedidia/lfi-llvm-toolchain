@@ -8,7 +8,7 @@ LLVM_MAJOR=19
 
 PREFIX=$1
 
-musl headers
+# musl headers
 export CC=$PREFIX/bin/clang
 cd musl
 make clean
