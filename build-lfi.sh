@@ -10,12 +10,11 @@ export MARCH=$2
 export ARCH=$2-lfi
 
 ./build-llvm.sh $PREFIX
+cp $ARCH-linux-musl.cfg $PREFIX/bin
 ./build-compiler-rt.sh $PREFIX
 ./build-musl.sh $PREFIX
 ./build-libcxx.sh $PREFIX
 ./build-mimalloc.sh $PREFIX
-
-cp $ARCH-linux-musl.cfg $PREFIX/bin
 
 cp $(which lfi-leg) $PREFIX/lfi-bin
 cp $(which lfi-postlink) $PREFIX/lfi-bin
