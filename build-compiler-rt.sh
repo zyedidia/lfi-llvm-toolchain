@@ -21,11 +21,11 @@ rm -rf build-compiler-rt-$ARCH
 mkdir -p build-compiler-rt-$ARCH
 cd build-compiler-rt-$ARCH
 cmake -G Ninja ../llvm-project/compiler-rt \
-    -DCMAKE_C_COMPILER=$PWD/../build-llvm-$ARCH-base/bin/clang \
-    -DCMAKE_CXX_COMPILER=$PWD/../build-llvm-$ARCH-base/bin/clang++ \
-    -DCMAKE_NM=$PWD/../build-llvm-$ARCH-base/bin/llvm-nm \
-    -DCMAKE_RANLIB=$PWD/../build-llvm-$ARCH-base/bin/llvm-ranlib \
-    -DCMAKE_AR=$PWD/../build-llvm-$ARCH-base/bin/llvm-ar \
+    -DCMAKE_C_COMPILER=$PREFIX/bin/clang \
+    -DCMAKE_CXX_COMPILER=$PREFIX/bin/clang++ \
+    -DCMAKE_NM=$PREFIX/bin/llvm-nm \
+    -DCMAKE_RANLIB=$PREFIX/bin/llvm-ranlib \
+    -DCMAKE_AR=$PREFIX/bin/llvm-ar \
     -DLLVM_TARGET_TRIPLE="$ARCH-linux-musl" \
     -DCMAKE_C_COMPILER_TARGET="$ARCH-linux-musl" \
     -DCMAKE_ASM_COMPILER_TARGET="$ARCH-linux-musl" \
