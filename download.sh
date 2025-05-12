@@ -1,7 +1,7 @@
 #!/bin/sh
 
 if [ ! -d llvm-project ]; then
-    git clone https://github.com/zyedidia/llvm-project --depth 1 -b lfi-19.1.4
+    git clone https://github.com/zyedidia/llvm-project --depth 1 -b lfi-mcinst
 fi
 
 if [ ! -d musl ]; then

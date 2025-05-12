@@ -4,7 +4,7 @@
 
 set -ex
 
-LLVM_MAJOR=19
+LLVM_MAJOR=21
 
 PREFIX=$1
 

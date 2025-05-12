@@ -7,8 +7,6 @@ set -e
 
 PREFIX=$1
 
-DEFINE_FLAGS="-DLFI_DEFAULT_FLAGS='\"$LFIFLAGS\"'"
-
 mkdir -p $PREFIX/sysroot/usr/lib
 mkdir -p $PREFIX/sysroot/lib
 mkdir -p $PREFIX/sysroot/usr/include
@@ -35,16 +33,10 @@ cmake -G Ninja ../llvm-project/llvm \
     -DCLANG_DEFAULT_UNWINDLIB="libunwind" \
     -DCLANG_DEFAULT_LINKER="lld" \
     -DCLANG_DEFAULT_OBJCOPY="llvm-objcopy" \
-    -DCMAKE_C_FLAGS="$DEFINE_FLAGS" \
-    -DCMAKE_CXX_FLAGS="$DEFINE_FLAGS" \
     -DDEFAULT_SYSROOT=../sysroot
 ninja
 ninja install/strip
 cd ..
-
-mv $PREFIX/bin/lld $PREFIX/bin/lld.orig
-./lld.gen > $PREFIX/bin/lld
-chmod +x $PREFIX/bin/lld
 
 rm -rf build-llvm-$ARCH
 mv build-llvm build-llvm-$ARCH
